@@ -18,7 +18,7 @@ app.add_middleware(
 
 DB_FILE = "users.db"
 
-# Veritabanını kur
+
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
@@ -84,7 +84,7 @@ def login_user(user: UserLogin, db: sqlite3.Connection = Depends(get_db)):
         "is_admin": bool(db_user['is_admin'])
     }
 
-# Statik dosyaları (HTML, CSS, JS) sunmak için
+
 app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
 if __name__ == "__main__":
