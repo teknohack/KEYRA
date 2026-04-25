@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modukeys - Özel Ekipmanlar</title>
-    <!-- CSS dosyamızı bağlıyoruz -->
+   
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="game.css">
-    <!-- FontAwesome (İkonlar için) -->
+  
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -28,7 +28,7 @@
   <body>
     <div id="container3d"></div>
 
-    <!-- Üst Menü (Navbar) -->
+    
     <nav class="navbar">
       <div class="nav-container">
         <a href="#" class="logo">MODU<span>KEYS</span></a>
@@ -58,7 +58,7 @@
                 "
               ></span>
             </a>
-            <!-- Giriş Yapmış Kullanıcı Dropdown Menüsü -->
+          
             <div id="user-dropdown" class="user-dropdown">
               <ul>
                 <li>
@@ -85,7 +85,7 @@
             </div>
           </div>
 
-          <!-- Sepet İkonu -->
+         
           <a href="#" class="cart-icon" id="cart-icon-btn">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-count">0</span>
@@ -104,7 +104,7 @@
     <canvas id="game-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
 </div>
 
-    <!-- 3D Model İçin Boş Alan (Tam Ekran) -->
+  
     <section
       class="hero-spacer"
       style="
@@ -139,9 +139,7 @@
       ></i>
     </section>
 
-    <!-- ==================================== -->
-    <!-- ⌨️ KLAVYELER KATEGORİSİ -->
-    <!-- ==================================== -->
+ 
     <section class="products" id="kategori-klavyeler">
       <h2
         style="
@@ -154,7 +152,7 @@
         Klavyeler
       </h2>
       <div class="product-grid">
-        <!-- Klavye 1 -->
+        
         <div
           class="product-card"
           data-product-id="klavye-1"
@@ -174,7 +172,7 @@
           </div>
         </div>
 
-        <!-- Klavye 2 -->
+       
         <div
           class="product-card"
           data-product-id="klavye-2"
@@ -194,7 +192,7 @@
           </div>
         </div>
 
-        <!-- Klavye 3 -->
+      
         <div
           class="product-card"
           data-product-id="klavye-3"
@@ -252,9 +250,7 @@
       </div>
     </section>
 
-    <!-- ==================================== -->
-    <!-- 🔲 TUŞ TAKIMLARI KATEGORİSİ -->
-    <!-- ==================================== -->
+  
     <section class="products" id="kategori-tuslar" style="margin-top: 100px">
       <h2
         style="
@@ -267,7 +263,7 @@
         Tuş Takımları (Keycaps)
       </h2>
       <div class="product-grid">
-        <!-- Tuş Takımı 1 -->
+      
         <div
           class="product-card"
           data-product-id="tus-1"
@@ -396,11 +392,11 @@
           </div>
         </div>
 
-        <!-- Diğer tuş takımlarını da buraya ekleyeceksin... -->
+        
       </div>
     </section>
 
-    <!-- Giriş/Kayıt Modal (Açılır Pencere) -->
+    
     <div class="modal-overlay" id="auth-modal">
       <div class="modal-content">
         <button class="close-btn" id="close-modal">
@@ -412,7 +408,7 @@
           <button class="tab-btn" id="tab-signup">Kayıt Ol</button>
         </div>
 
-        <!-- Giriş Formu -->
+     
         <form class="auth-form active" id="form-login">
           <h2>Hoş Geldiniz</h2>
           <div class="form-group">
@@ -436,12 +432,12 @@
           <button type="submit" class="btn-submit">Giriş Yap</button>
         </form>
 
-        <!-- Kayıt Formu (ID'ler Düzeltildi) -->
+   
         <form class="auth-form" id="form-signup">
           <h2>Hesap Oluştur</h2>
           <div class="form-group">
             <label>Ad Soyad</label>
-            <!-- JavaScript'in okuması için ID'leri "reg-name", "reg-email" yaptık -->
+          
             <input
               type="text"
               id="reg-name"
@@ -484,7 +480,7 @@
 
     
 
-    <!-- Sepet Yan Paneli (Sidebar) -->
+    
     <div class="cart-sidebar" id="cart-sidebar">
       <div class="cart-header">
         <h2>Sepetim</h2>
@@ -514,7 +510,7 @@
     <script src="game.js"></script>
 </body>
     <script type="module" src="three_animation.js"></script>
-    <!-- İletişim (Footer) Bölümü -->
+  
     <footer
       id="footer-iletisim"
       style="
