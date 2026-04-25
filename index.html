@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modukeys - Özel Ekipmanlar</title>
+    <!-- CSS dosyamızı bağlıyoruz -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="game.css">
+    <!-- FontAwesome (İkonlar için) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      
+    />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+   
+    
+  </head>
+  <body>
+    <div id="container3d"></div>
+
+    <!-- Üst Menü (Navbar) -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="logo">MODU<span>KEYS</span></a>
+
+        <ul class="nav-links">
+          <li><a href="#" class="active">Anasayfa</a></li>
+          <li><a href="#kategori-klavyeler">Klavyeler</a></li>
+          <li><a href="#kategori-tuslar">Tuşlar</a></li>
+          <li>
+            <a href="kisisellestir.html">Kendin Tasarla</a>
+          </li>
+          <li><a href="#footer-iletisim">İletişim</a></li>
+        </ul>
+
+        <div class="nav-icons">
+          <button id="game-btn" class="nav-game-btn">Oyna Kazan!</button>
+          <div class="user-menu-container">
+            <a href="#" class="user-icon" id="user-btn">
+              <i class="fas fa-user"></i>
+              <span
+                id="user-name-display"
+                style="
+                  display: none;
+                  margin-left: 5px;
+                  font-size: 0.9rem;
+                  font-weight: bold;
+                "
+              ></span>
+            </a>
+            <!-- Giriş Yapmış Kullanıcı Dropdown Menüsü -->
+            <div id="user-dropdown" class="user-dropdown">
+              <ul>
+                <li>
+                  <a href="profile.html"
+                    ><i class="fas fa-id-badge"></i> Profilim</a
+                  >
+                </li>
+                <li>
+                  <a href="orders.html"
+                    ><i class="fas fa-box"></i> Siparişlerim</a
+                  >
+                </li>
+                <li id="admin-panel-link" style="display: none">
+                  <a href="admin.html"
+                    ><i class="fas fa-cog"></i> Admin Paneli</a
+                  >
+                </li>
+                <li>
+                  <a href="#" id="nav-logout-btn" style="color: #ef4444"
+                    ><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sepet İkonu -->
+          <a href="#" class="cart-icon" id="cart-icon-btn">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+     
+
+<div id="game-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000;">
+    <div id="game-ui" style="position: absolute; top: 20px; width: 100%; text-align: center; color: white; font-size: 20px; pointer-events: none; font-family: Arial;">
+        <p>Puan: <span id="score">0</span></p>
+        <p id="discount-text">İndirim: %0</p>
+    </div>
+    <canvas id="game-canvas" style="display: block; width: 100%; height: 100%;"></canvas>
+</div>
+
+    <!-- 3D Model İçin Boş Alan (Tam Ekran) -->
+    <section
+      class="hero-spacer"
+      style="
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        padding-bottom: 50px;
+      "
+    >
+      <h1 id="scroll-text"
+        style="
+          color: #ffffff;
+          font-size: 2rem;
+          font-weight: 800;
+          opacity: 0.7;
+          letter-spacing: 2px;
+
+        "
+      >
+        ÜRÜNLERİ KEŞFETMEK İÇİN KAYDIR
+      </h1>
+      <i
+        class="fas fa-chevron-down"
+        style="
+          color: #8b5cf6;
+          font-size: 2rem;
+          margin-top: 15px;
+          animation: bounce 2s infinite;
+        "
+      ></i>
+    </section>
+
+    <!-- ==================================== -->
+    <!-- ⌨️ KLAVYELER KATEGORİSİ -->
+    <!-- ==================================== -->
+    <section class="products" id="kategori-klavyeler">
+      <h2
+        style="
+          text-align: left;
+          border-bottom: 2px solid #e5e7eb;
+          padding-bottom: 10px;
+          margin-bottom: 30px;
+        "
+      >
+        Klavyeler
+      </h2>
+      <div class="product-grid">
+        <!-- Klavye 1 -->
+        <div
+          class="product-card"
+          data-product-id="klavye-1"
+          data-product-name="Modukeys Alpha"
+          data-product-img="mavik.jpeg"
+          data-product-price="2.450 TL"
+        >
+          <div class="product-img">
+            <img src="mavik.jpeg" alt="Klavye 1" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">KLAVYE</p>
+            <h3>Modukeys Alpha</h3>
+            <div class="price"><span class="new-price">2.450 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+
+        <!-- Klavye 2 -->
+        <div
+          class="product-card"
+          data-product-id="klavye-2"
+          data-product-name="Modukeys Beta"
+          data-product-img="sarık.jpeg"
+          data-product-price="2.800 TL"
+        >
+          <div class="product-img">
+            <img src="sarık.jpeg" alt="Klavye 2" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">KLAVYE</p>
+            <h3>Modukeys Beta</h3>
+            <div class="price"><span class="new-price">2.800 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+
+        <!-- Klavye 3 -->
+        <div
+          class="product-card"
+          data-product-id="klavye-3"
+          data-product-name="Modukeys Gamma"
+          data-product-img="renklik.jpeg"
+          data-product-price="3.100 TL"
+        >
+          <div class="product-img">
+            <img src="renklik.jpeg" alt="Klavye 3" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">KLAVYE</p>
+            <h3>Modukeys Gamma</h3>
+            <div class="price"><span class="new-price">3.100 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="klavye-4"
+          data-product-name="Modukeys Gamma"
+          data-product-img="mork.jpeg"
+          data-product-price="3.600 TL"
+        >
+          <div class="product-img">
+            <img src="mork.jpeg" alt="Klavye 4" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">KLAVYE</p>
+            <h3>Modukeys Teta</h3>
+            <div class="price"><span class="new-price">3.600 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="klavye-5"
+          data-product-name="Modukeys Gamma"
+          data-product-img="mavilik.jpeg"
+          data-product-price="8.700 TL"
+        >
+          <div class="product-img">
+            <img src="mavilik.jpeg" alt="Klavye 5" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">KLAVYE</p>
+            <h3>Modukeys Omega</h3>
+            <div class="price"><span class="new-price">8.700 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================== -->
+    <!-- 🔲 TUŞ TAKIMLARI KATEGORİSİ -->
+    <!-- ==================================== -->
+    <section class="products" id="kategori-tuslar" style="margin-top: 100px">
+      <h2
+        style="
+          text-align: left;
+          border-bottom: 2px solid #e5e7eb;
+          padding-bottom: 10px;
+          margin-bottom: 30px;
+        "
+      >
+        Tuş Takımları (Keycaps)
+      </h2>
+      <div class="product-grid">
+        <!-- Tuş Takımı 1 -->
+        <div
+          class="product-card"
+          data-product-id="tus-1"
+          data-product-name="Pembe Kar Küresi Özel Tasarım Tuş"
+          data-product-img="pembiş.jpeg"
+          data-product-price="850 TL"
+        >
+          <div class="product-img">
+            <img src="pembiş.jpeg" alt="Tuş 1" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Pembe Kar Küresi Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">850 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+
+        <div
+          class="product-card"
+          data-product-id="tus-2"
+          data-product-name="Ördek Özel Tasarım Tuş"
+          data-product-img="ördek.jpeg"
+          data-product-price="600 TL"
+        >
+          <div class="product-img">
+            <img src="ördek.jpeg" alt="Tuş 2" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Ördek Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">600 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="tus-3"
+          data-product-name="Harry Potter Özel Tasarım Tuş"
+          data-product-img="harry.jpeg"
+          data-product-price="300 TL"
+        >
+          <div class="product-img">
+            <img src="harry.jpeg" alt="Tuş 3" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Harry Potter Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">300 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="tus-4"
+          data-product-name="Pembe Hayalet Özel Tasarım Tuş"
+          data-product-img="hayalet.jpeg"
+          data-product-price="730 TL"
+        >
+          <div class="product-img">
+            <img src="hayalet.jpeg" alt="Tuş 4" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Pembe Hayalet Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">730 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="tus-5"
+          data-product-name="Tavşan Özel Tasarım Tuş"
+          data-product-img="davşan.jpeg"
+          data-product-price="450 TL"
+        >
+          <div class="product-img">
+            <img src="davşan.jpeg" alt="Tuş 5" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Tavşan Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">450 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="tus-6"
+          data-product-name="Capipara Özel Tasarım Tuş"
+          data-product-img="capi.jpeg"
+          data-product-price="800 TL"
+        >
+          <div class="product-img">
+            <img src="capi.jpeg" alt="Tuş 6" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Capipara Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">800 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+        <div
+          class="product-card"
+          data-product-id="tus-7"
+          data-product-name="Pembe Telefon Özel Tasarım Tuş"
+          data-product-img="tele.jpeg"
+          data-product-price="750 TL"
+        >
+          <div class="product-img">
+            <img src="tele.jpeg" alt="Tuş 7" />
+            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+          </div>
+          <div class="product-info">
+            <p class="category">TUŞ TAKIMI</p>
+            <h3>Pembe Telefon Özel Tasarım Tuş</h3>
+            <div class="price"><span class="new-price">750 TL</span></div>
+            <button class="btn-add-cart">Sepete Ekle</button>
+          </div>
+        </div>
+
+        <!-- Diğer tuş takımlarını da buraya ekleyeceksin... -->
+      </div>
+    </section>
+
+    <!-- Giriş/Kayıt Modal (Açılır Pencere) -->
+    <div class="modal-overlay" id="auth-modal">
+      <div class="modal-content">
+        <button class="close-btn" id="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="auth-tabs">
+          <button class="tab-btn active" id="tab-login">Giriş Yap</button>
+          <button class="tab-btn" id="tab-signup">Kayıt Ol</button>
+        </div>
+
+        <!-- Giriş Formu -->
+        <form class="auth-form active" id="form-login">
+          <h2>Hoş Geldiniz</h2>
+          <div class="form-group">
+            <label>E-posta</label>
+            <input
+              type="email"
+              id="login-email"
+              required
+              placeholder="E-posta adresiniz"
+            />
+          </div>
+          <div class="form-group">
+            <label>Şifre</label>
+            <input
+              type="password"
+              id="login-password"
+              required
+              placeholder="Şifreniz"
+            />
+          </div>
+          <button type="submit" class="btn-submit">Giriş Yap</button>
+        </form>
+
+        <!-- Kayıt Formu (ID'ler Düzeltildi) -->
+        <form class="auth-form" id="form-signup">
+          <h2>Hesap Oluştur</h2>
+          <div class="form-group">
+            <label>Ad Soyad</label>
+            <!-- JavaScript'in okuması için ID'leri "reg-name", "reg-email" yaptık -->
+            <input
+              type="text"
+              id="reg-name"
+              required
+              placeholder="Adınız Soyadınız"
+            />
+          </div>
+          <div class="form-group">
+            <label>E-posta</label>
+            <input
+              type="email"
+              id="reg-email"
+              required
+              placeholder="E-posta adresiniz"
+            />
+          </div>
+          <div class="form-group">
+            <label>Şifre</label>
+            <input
+              type="password"
+              id="reg-password"
+              required
+              placeholder="Şifreniz"
+            />
+          </div>
+          <button type="submit" class="btn-submit">Kayıt Ol</button>
+        </form>
+
+        <div
+          id="auth-message"
+          style="
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+          "
+        ></div>
+      </div>
+    </div>
+
+    
+
+    <!-- Sepet Yan Paneli (Sidebar) -->
+    <div class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h2>Sepetim</h2>
+        <button id="close-cart-btn"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="cart-items-container" id="cart-items-container">
+        <p style="text-align: center; color: #6b7280; margin-top: 20px">
+          Sepetiniz boş.
+        </p>
+      </div>
+      <div class="cart-footer">
+        <div class="discount-code-container" style="display: flex; gap: 10px; margin-bottom: 15px;">
+          <input type="text" id="discount-code-input" placeholder="İndirim Kodu" style="flex: 1; padding: 10px; border: 1px solid #e5e7eb; border-radius: 5px; outline: none; font-size: 14px; color: #111;">
+          <button id="apply-discount-btn" style="padding: 10px 15px; background-color: #8b5cf6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background 0.3s; font-size: 14px;">Uygula</button>
+        </div>
+        <div id="discount-message" style="font-size: 0.9rem; margin-bottom: 10px; display: none; text-align: center;"></div>
+        <div class="cart-total">
+          <span>Toplam:</span>
+          <span id="cart-total-price">0 TL</span>
+        </div>
+        <button class="btn-checkout" id="btn-checkout">Satın Al</button>
+      </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <script src="script.js"></script>
+    <script src="game.js"></script>
+</body>
+    <script type="module" src="three_animation.js"></script>
+    <!-- İletişim (Footer) Bölümü -->
+    <footer
+      id="footer-iletisim"
+      style="
+        background-color: #111827;
+        color: white;
+        text-align: center;
+        padding: 50px 20px;
+        margin-top: 80px;
+        border-top: 4px solid #8b5cf6;
+      "
+    >
+      <h2 style="margin-bottom: 15px">Modukeys İletişim</h2>
+      <p style="color: #9ca3af; margin-bottom: 20px">
+        Özel siparişleriniz ve sorularınız için bize ulaşın.
+      </p>
+      <p style="font-size: 1.1rem; font-weight: bold; color: #8b5cf6">
+        <i class="fas fa-envelope"></i> destek@modukeys.com
+      </p>
+      <div
+        style="
+          margin-top: 25px;
+          font-size: 1.8rem;
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+        "
+      >
+        <i
+          class="fab fa-instagram"
+          style="cursor: pointer; transition: color 0.3s"
+          onmouseover="this.style.color = '#8b5cf6'"
+          onmouseout="this.style.color = 'white'"
+        ></i>
+        <i
+          class="fab fa-twitter"
+          style="cursor: pointer; transition: color 0.3s"
+          onmouseover="this.style.color = '#8b5cf6'"
+          onmouseout="this.style.color = 'white'"
+        ></i>
+        <i
+          class="fab fa-discord"
+          style="cursor: pointer; transition: color 0.3s"
+          onmouseover="this.style.color = '#8b5cf6'"
+          onmouseout="this.style.color = 'white'"
+        ></i>
+      </div>
+    </footer>
+  </body>
+</html>

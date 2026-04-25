@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kişiselleştir | Neon Store</title>
+    <link rel="stylesheet" href="kisisellestir.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@5.5.2/dist/browser.js"></script>
+</head>
+
+<body class="studio-body">
+    <header class="main-header">
+        <div class="header-left">
+            <a href="index.html">Ana Sayfa</a>
+           
+            <a href="kisisellestir.html" style="color: #00f3ff">Kişiselleştir</a>
+        </div>
+        <div class="header-right">
+            <a href="#sepet" class="cart-btn">Sepet (0)</a>
+        </div>
+    </header>
+
+    <div id="loader">KLAVYE YÜKLENİYOR...</div>
+    <div id="emoji-picker-container"></div>
+
+    <div class="ui-panel">
+        <div class="label">HEDEF TUŞ:</div>
+        <div id="targetName">TUŞ SEÇİN</div>
+
+        <input type="text" id="userInput" placeholder="Yazı veya Emoji..." />
+        <button class="btn-emoji" id="emojiBtn">EMOJİ SEÇ 😃</button>
+        <button class="btn-model" id="modelBtn">MODEL (.GLB) EKLE</button>
+        <input type="file" id="fileIn" accept=".glb" style="display: none" />
+
+        <div class="mod-list-container">
+            <div class="label" style="margin-top:15px;">UYGULANANLAR:</div>
+            <div id="modList">
+                <div style="color:#555; font-size:0.8rem; text-align:center;">Henüz bir şey eklenmedi.</div>
+            </div>
+        </div>
+
+        <div id="priceDisplay">Toplam Ek: 0 TL</div>
+        <button class="buy-btn" style="margin-top: 15px; width: 100%;">Tasarımı Sepete Ekle</button>
+    </div>
+
+    <script src="kisisellestir.js"></script>
+</body>
+
+</html>

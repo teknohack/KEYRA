@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modukeys - Profilim</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .profile-container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 50px;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 30px;
+      }
+      .profile-sidebar {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        height: fit-content;
+        border: 1px solid #e5e7eb;
+      }
+      .profile-avatar {
+        width: 100px;
+        height: 100px;
+        background-color: #f4f4f5;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 20px;
+        font-size: 3rem;
+        color: #8b5cf6;
+      }
+      .profile-name {
+        font-size: 1.5rem;
+        color: #111827;
+        margin-bottom: 5px;
+      }
+      .profile-email {
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+      }
+      .profile-content {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+      }
+      .content-header {
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+      }
+      .favorites-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+      }
+      .fav-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s;
+      }
+      .fav-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .fav-card img {
+        max-width: 100%;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 15px;
+      }
+      .fav-card h4 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        color: #111827;
+      }
+      .fav-card .price {
+        color: #8b5cf6;
+        font-weight: bold;
+      }
+      .btn-remove-fav {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: #ef4444;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">MODU<span>KEYS</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">Anasayfaya Dön</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="profile-container">
+      <!-- Sol Taraf: Kullanıcı Bilgileri -->
+      <div class="profile-sidebar">
+        <div class="profile-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <h2 class="profile-name" id="display-name">Yükleniyor...</h2>
+        <p class="profile-email" id="display-email">Lütfen bekleyin...</p>
+      </div>
+
+      <!-- Sağ Taraf: Favoriler -->
+      <div class="profile-content">
+        <div class="content-header">
+          <h2>
+            <i class="fas fa-heart" style="color: #ef4444"></i> Favori Ürünlerim
+          </h2>
+        </div>
+        <div class="favorites-grid" id="favorites-container">
+          <!-- Favoriler buraya JavaScript ile yüklenecek -->
+        </div>
+      </div>
+    </div>
+
+    <script src="profile.js"></script>
+  </body>
+</html>

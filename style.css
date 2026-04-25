@@ -1,0 +1,655 @@
+/* ==========================================
+   🛠️ 1. GENEL AYARLAR VE SIFIRLAMA (RESET)
+   ========================================== */
+* {
+    margin: 0; /* Tarayıcının varsayılan dış boşluklarını sıfırla */
+    padding: 0; /* Tarayıcının varsayılan iç boşluklarını sıfırla */
+    box-sizing: border-box; /* Kutu boyutlarına padding'i de dahil et (taşmaları önler) */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Sitenin genel yazı tipi */
+}
+
+body {
+    background-color: #f4f4f5; /* Sitenin arkaplan rengi: Açık gri */
+    color: #111827; /* Sitenin genel yazı rengi: Siyahımsı koyu gri */
+    line-height: 1.6; /* Satırlar arası boşluk */
+}
+
+/* ==========================================
+   🟣 2. ÜST MENÜ (NAVBAR) TASARIMI
+   ========================================== */
+.navbar {
+    background-color: #000000; /* Menünün arka planı siyah */
+    padding: 15px 50px; /* İç boşluklar (Üst-alt 15px, sağ-sol 50px) */
+    position: sticky; /* Ekranı aşağı kaydırsak bile menü... */
+    top: 0; /* ...hep en üstte yapışık kalır */
+    z-index: 100; /* Diğer elementlerin her zaman üstünde (önünde) durmasını sağlar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Menünün altına hafif bir gölge atar */
+}
+
+.nav-container {
+    display: flex; /* İçindeki elemanları yan yana dizer */
+    justify-content: space-between; /* Logoyu sola, linkleri ortaya, ikonları sağa atar */
+    align-items: center; /* Dikeyde tam ortalar */
+    max-width: 1200px; /* Sayfa çok büyükse menünün aşırı uzamasını engeller */
+    margin: 0 auto; /* Menüyü sayfanın tam ortasına yerleştirir */
+}
+
+/* --- Logo Ayarları --- */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #fff;
+    text-decoration: none; /* Alt çizgiyi kaldırır */
+    letter-spacing: 2px; /* Harfler arasına boşluk koyar */
+}
+
+.logo span {
+    color: #8b5cf6; /* Logodaki 'KEYS' yazısını mora boyar */
+}
+
+/* --- Sayfa Linkleri (Anasayfa, Klavyeler vs.) --- */
+.nav-links {
+    list-style: none; /* Madde imlerini (noktaları) kaldırır */
+    display: flex;
+    gap: 25px; /* Linkler arası boşluk */
+}
+
+.nav-links a {
+    color: #e5e7eb; /* Açık gri renk */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease; /* Renk değişimini yumuşak yapar */
+}
+
+.nav-links a:hover {
+    color: #8b5cf6; /* Fareyle üzerine gelince mor olur */
+}
+
+/* --- Sağdaki İkonlar (Kullanıcı ve Sepet) --- */
+.nav-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-icons a {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    position: relative; /* Bildirim sayısının ikonun üstüne çıkabilmesi için şart */
+    transition: color 0.3s;
+}
+
+.nav-icons a:hover {
+    color: #8b5cf6;
+}
+
+/* --- Sepetin Üzerindeki Minik Bildirim Sayısı --- */
+.cart-count {
+    position: absolute;
+    top: -8px; /* İkonun üstünde dursun */
+    right: -10px; /* İkonun sağında dursun */
+    background-color: #8b5cf6; /* Mor arka plan */
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 50%; /* Tam yuvarlak yapar */
+    font-weight: bold;
+}
+
+/* ==========================================
+   👤 3. KULLANICI AÇILIR MENÜSÜ (DROPDOWN)
+   ========================================== */
+.user-menu-container {
+    position: relative; /* Menünün tam ikonun altında açılması için gerekli */
+}
+
+.user-dropdown {
+  /* Profil Dropdown Başlangıç Hali (Gizli) */
+    display: none; /* Başlangıçta gizle */
+    position: absolute;
+    top: 100%; /* Logonun hemen altına açılması için */
+    right: 0;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+/* JavaScript 'active' sınıfını eklediğinde görünür yap */
+#user-dropdown.active {
+    display: block !important;
+}
+
+
+.user-dropdown.active {
+    display: block; /* Sınıfına 'active' gelince menüyü gösterir */
+}
+
+.user-dropdown ul {
+    list-style: none;
+    padding: 10px 0;
+}
+
+.user-dropdown ul li a {
+    display: block;
+    padding: 10px 20px;
+    color: #4b5563;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.user-dropdown ul li a i {
+    margin-right: 10px; /* İkonlarla yazı arasına boşluk atar */
+    width: 15px;
+    text-align: center;
+}
+
+.user-dropdown ul li a:hover {
+    background-color: #f3f4f6; /* Üzerine gelince arkaplanı hafif gri yapar */
+    color: #8b5cf6;
+}
+
+/* ==========================================
+   📦 4. ÜRÜNLER VE KART TASARIMLARI
+   ========================================== */
+.products {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 50px;
+}
+
+.products h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+/* Başlığın altına mor bir çizgi ekler */
+.products h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #8b5cf6;
+    margin: 10px auto 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ekrana her satırda tam 3 ürün sığdırır */
+    gap: 30px; 
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-10px); /* Kartın üzerine gelince yukarı doğru zıplar */
+    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2); /* Etrafına mor gölge yayar */
+}
+
+.product-img {
+    height: 250px;
+    background-color: #f9fafb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Kalp ikonunu köşeye tutturmak için */
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.product-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Resmi bozmadan kartın içine sığdırır */
+}
+
+/* --- Kalp İkonu (Favoriler) --- */
+.btn-favorite {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: #9ca3af; /* Varsayılan renk: Gri */
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.btn-favorite:hover {
+    color: #ef4444; /* Üzerine gelince: Kırmızı */
+    transform: scale(1.1); /* Biraz büyür */
+}
+
+.btn-favorite.active {
+    color: #ef4444; /* Kalp seçiliyse kırmızı kalır */
+}
+
+/* --- Ürün Yazıları ve Fiyatlar --- */
+.product-info {
+    padding: 20px;
+}
+
+.category {
+    font-size: 0.8rem;
+    color: #8b5cf6;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #111827;
+    height: 50px; /* Başlıklar farklı uzunlukta olsa bile butonların hizasını bozmaz */
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.old-price {
+    text-decoration: line-through; /* Üstü çizili eski fiyat */
+    color: #9ca3af;
+    font-size: 0.9rem;
+}
+
+.new-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #8b5cf6; /* Mor yeni fiyat */
+}
+
+/* --- Sepete Ekle Butonu --- */
+.btn-add-cart {
+    width: 100%;
+    padding: 12px;
+    background-color: transparent;
+    border: 2px solid #8b5cf6;
+    color: #8b5cf6;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+    background-color: #8b5cf6;
+    color: white; /* Fareyle gelince içi dolar, yazı beyaz olur */
+}
+
+/* ==========================================
+   🔐 5. GİRİŞ YAP & KAYIT OL PENCERESİ (MODAL)
+   ========================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Arkaplanı yarı saydam siyah yapar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0; /* Normalde görünmezdir */
+    pointer-events: none; /* Görünmezken tıklamaları engeller */
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1; /* 'active' olunca görünür olur */
+    pointer-events: all;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px; /* Pencerenin genişliği */
+    border-radius: 10px;
+    padding: 30px;
+    position: relative;
+    border: 1px solid #e5e7eb;
+    transform: translateY(-20px); /* Yukarıdan aşağı düşme efekti için yukarı çeker */
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0); /* Efektin bitiş noktası */
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s;
+}
+
+.close-btn:hover {
+    color: #8b5cf6;
+}
+
+/* --- Giriş ve Kayıt Sekmeleri --- */
+.auth-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px; /* Çizginin üzerine oturması için */
+}
+
+.tab-btn.active {
+    color: #8b5cf6;
+    border-bottom: 2px solid #8b5cf6; /* Seçili sekmenin altını mor çizer */
+}
+
+.auth-form {
+    display: none; /* Aktif olmayan formu gizle */
+}
+
+.auth-form.active {
+    display: block; /* Aktif formu göster */
+}
+
+.auth-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #111827;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #4b5563;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #f9fafb;
+    border: 1px solid #d1d5db;
+    color: #111827;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #8b5cf6; /* Yazı yazarken kutunun etrafı mor olur */
+}
+
+.btn-submit {
+    background-color: #8b5cf6;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #7c3aed; /* Üzerine gelince biraz koyulaşır */
+}
+
+/* ==========================================
+   🛒 6. SAĞDAN AÇILAN SEPET MENÜSÜ
+   ========================================== */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Menüyü ekranın sağının dışına saklar */
+    width: 400px;
+    max-width: 100%; /* Telefondaysa %100 genişlik alır */
+    height: 100%;
+    background-color: #ffffff;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease; /* Kayarak açılma animasyonu */
+}
+
+.cart-sidebar.active {
+    right: 0; /* 'active' olunca dışarıdan ekranın içine kayar */
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#close-cart-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #4b5563;
+    cursor: pointer;
+}
+
+#close-cart-btn:hover {
+    color: #ef4444; /* Kapatma çarpısı üstüne gelince kırmızı olur */
+}
+
+.cart-items-container {
+    flex-grow: 1; /* Ortadaki boşluğu kaplar */
+    overflow-y: auto; /* Çok ürün varsa aşağı kaydırma (scroll) çubuğu çıkarır */
+    padding: 20px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.cart-item-details {
+    flex-grow: 1;
+}
+
+.cart-item-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #111827;
+}
+
+.cart-item-price {
+    color: #8b5cf6;
+    font-weight: bold;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 15px;
+    background-color: #8b5cf6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ==========================================
+   📱 7. MOBİL UYUMLULUK (TELEFONLAR İÇİN)
+   ========================================== */
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* Tabletlerde 2'li */
+    }
+    .navbar {
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .nav-icons {
+        justify-content: center;
+        margin-top: 5px;
+    }
+    #scroll-text {
+        font-size: 1.5rem !important;
+        text-align: center;
+        padding: 0 10px;
+    }
+    .products {
+        padding: 0 20px;
+        margin: 40px auto;
+    }
+    .products h2 {
+        font-size: 1.8rem;
+    }
+    #footer-iletisim {
+        padding: 30px 15px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Telefonlarda 1'li */
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+
+/* 3D Container Styles */
+#container3d { background-color: #212121;position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+.hero-spacer { position: relative; z-index: 2; pointer-events: none; transform: translateY(-50px)}
+body { background-color: transparent; }
+html { background-color: #f4f4f5; }
+
+
+@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+
+#game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    z-index: 10000;
+}
+
+#game-ui {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#game-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

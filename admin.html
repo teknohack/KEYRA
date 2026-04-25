@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modukeys - Admin Paneli</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .admin-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+      }
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 15px;
+      }
+      .user-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .user-table th,
+      .user-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .user-table th {
+        background-color: #f9fafb;
+        color: #4b5563;
+        font-weight: bold;
+      }
+      .badge-admin {
+        background-color: #8b5cf6;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      .badge-user {
+        background-color: #9ca3af;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+      .btn-delete {
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .btn-delete:hover {
+        background-color: #dc2626;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">MODU<span>KEYS</span> Yönetim</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Siteye Dön</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="admin-container">
+      <div class="admin-header">
+        <h2>Kayıtlı Kullanıcılar</h2>
+        <p>
+          Toplam:
+          <span id="total-users" style="font-weight: bold; color: #8b5cf6"
+            >0</span
+          >
+        </p>
+      </div>
+
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Ad Soyad</th>
+            <th>E-posta</th>
+            <th>Yetki</th>
+            <th>İşlem</th>
+          </tr>
+        </thead>
+        <tbody id="user-table-body">
+          <tr>
+            <td colspan="5" style="text-align: center">
+              Kullanıcılar yükleniyor...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

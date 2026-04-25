@@ -1,0 +1,397 @@
+/* --- RENK DEĞİŞKENLERİ --- */
+:root {
+    --bg-black: #878787;
+    --neon-purple: #bc13fe;
+    --neon-cyan: #00f3ff;
+    --text-color: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-black);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+#container3d {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100vh;
+    z-index: -1; 
+}
+
+/* --- NAVİGASYON (HEADER) --- */
+.main-header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1100px;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid var(--neon-purple);
+    z-index: 2000; /* Oyun butonu ve ürünlerden üstte */
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
+}
+
+.header-left a, .header-right a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.header-left a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.cart-btn {
+    background: linear-gradient(45deg, var(--neon-purple), var(--neon-cyan));
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 12px;
+}
+
+/* --- OYUN ELEMENTLERİ --- */
+#game-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 15px 25px;
+    background: var(--neon-purple);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1500;
+    box-shadow: 0 0 15px var(--neon-purple);
+    transition: 0.3s;
+}
+
+#game-btn:hover {
+    background: var(--neon-cyan);
+    box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+#game-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #c8c8c8 !important;
+    display: none;
+    z-index: 9999;
+}
+
+#game-canvas { display: block; width: 100%; height: 100%; }
+
+#game-ui {
+    position: absolute;
+    top: 20px; width: 100%;
+    text-align: center;
+    font-size: 24px;
+    pointer-events: none;
+}
+
+#close-game {
+    pointer-events: auto;
+    background: #ff4444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* --- İÇERİK --- */
+.spacer {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.neon-title {
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0 0 10px var(--neon-purple), 0 0 30px var(--neon-cyan);
+}
+
+.content-section {
+    padding: 100px 5%;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.section-title {
+    text-align: center;
+    color: var(--neon-cyan);
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.4s;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.product-card:hover {
+    transform: translateY(-15px);
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
+}
+
+.product-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+}
+
+.price {
+    font-size: 1.6rem;
+    color: var(--neon-cyan);
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.buy-btn {
+    text-decoration: none;
+    background: transparent;
+    border: 2px solid var(--neon-purple);
+    color: white;
+    padding: 10px 35px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: var(--neon-purple);
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+.sub-page {
+    background-color: var(--bg-black);
+}
+
+.sub-page #container3d {
+    display: none; /* Alt sayfalarda 3D modeli gizleyebiliriz veya arkada kalabilir */
+}
+/* --- KİŞİSELLEŞTİRME STÜDYOSU EK CSS --- */
+.studio-body {
+    margin: 0;
+    overflow: hidden;
+}
+
+.studio-body canvas {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: -1;
+}
+
+.ui-panel {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    width: 280px;
+    background: rgba(10, 10, 10, 0.95);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid var(--neon-cyan);
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ui-panel .label {
+    font-size: 0.7rem;
+    color: #777;
+    margin-bottom: 5px;
+}
+
+#targetName {
+    color: var(--neon-cyan);
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: #000;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.ui-panel input, .ui-panel button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ui-panel input {
+    
+    width: 100%;
+    box-sizing: border-box; /* KRİTİK: Genişliği padding dahil hesaplar, taşmayı engeller */
+    padding: 12px;
+    margin-top: 10px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 10px;
+    display: block; /* Kutunun satırı tam kaplamasını sağlar */
+}
+
+.btn-emoji { background: var(--neon-purple); color: #fff; border: none; }
+.btn-model { background: var(--neon-cyan); color: #000; border: none; }
+
+#priceDisplay {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--neon-cyan);
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#emoji-picker-container {
+    display: none;
+    position: absolute;
+    right: 320px;
+    top: 100px;
+    z-index: 200;
+}
+
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: var(--neon-cyan);
+}
+/* ... önceki CSS kodlarının altına ekleyin ... */
+
+.mod-list-container {
+    max-height: 150px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-right: 5px;
+}
+
+/* Scrollbar tasarımı */
+.mod-list-container::-webkit-scrollbar { width: 4px; }
+.mod-list-container::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 10px; }
+
+.mod-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+    border: 1px solid #222;
+}
+
+.mod-info { display: flex; flex-direction: column; }
+.mod-type { color: var(--neon-cyan); font-size: 0.7rem; }
+
+.btn-remove {
+    background: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    width: auto !important; /* Global buton genişliğini ezmek için */
+    margin: 0 !important;
+}
+
+.btn-remove:hover { background: #ff0000; }
+
+/* ==========================================
+   📱 MOBİL UYUMLULUK
+   ========================================== */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px 15px;
+        top: 10px;
+    }
+    .header-left, .header-right {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .header-left a {
+        margin: 0 8px;
+        font-size: 0.75rem;
+    }
+    
+    .ui-panel {
+        top: auto;
+        bottom: 90px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 90%;
+        max-width: 350px;
+        padding: 15px;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    
+    #game-btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    #emoji-picker-container {
+        right: 50%;
+        transform: translateX(50%);
+        top: 25%;
+    }
+    
+    .neon-title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    .section-title {
+        font-size: 1.8rem;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
