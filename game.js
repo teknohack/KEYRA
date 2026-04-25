@@ -1,4 +1,4 @@
-// --- 1. DEĞİŞKENLER ---
+
 let score = 0;
 let gameActive = false;
 let totalSpawnedBalls = 0;
@@ -20,7 +20,7 @@ const discountElement = document.getElementById('discount-text');
 
 let basket = { x: 0, y: 0, w: 150, h: 80, r: 0 };
 
-// --- 2. RESİMLER ---
+
 const basketImg = new Image();
 basketImg.src = 'cubuk.png';
 
@@ -38,7 +38,7 @@ imageSources.forEach(src => {
     };
 });
 
-// --- 3. OYUN FONKSİYONLARI ---
+
 function generateDiscountCode(length = 7) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let res = '';
@@ -108,7 +108,7 @@ function showGameOver() {
     ctx.fillText("Kopyalamak için tıkla!", canvas.width / 2, canvas.height / 2 + 80);
 }
 
-// --- 4. OLAYLAR (EVENTS) ---
+
 window.addEventListener('mousemove', (e) => {
     basket.x = e.clientX - basket.w / 2;
     basket.y = window.innerHeight - (basket.h + 20);
@@ -127,12 +127,12 @@ canvas.addEventListener('click', () => {
         navigator.clipboard.writeText(finalDiscountCode).then(() => {
             alert("Kod kopyalandı: " + finalDiscountCode);
             
-            // --- OYUNU KAPATMA VE TEMİZLEME İŞLEMİ ---
-            gameOverlay.style.display = 'none'; // Oyun ekranını gizle
-            gameActive = false;                 // Oyun döngüsünü durdur
-            enableScroll();                     // Sayfa kaydırmayı aç
             
-            // Oyunu sıfırla (Bir sonraki girişe hazırlık)
+            gameOverlay.style.display = 'none'; 
+            gameActive = false;                 
+            enableScroll();                     
+            
+           
             score = 0;
             totalSpawnedBalls = 0;
             balls = [];
