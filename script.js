@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // ==========================================
-    // 🛒 1. SEPET (SHOPPING CART) MANTIĞI
-    // ==========================================
-
+   
 
     if (history.scrollRestoration) {
     history.scrollRestoration = 'manual';
 }
 
-// Sayfa yüklendiğinde en yukarıya kaydırır
+
 window.onload = () => {
     window.scrollTo(0, 0);
 };
@@ -23,7 +20,7 @@ window.onload = () => {
     const addToCartButtons = document.querySelectorAll('.btn-add-cart');
 
     let cart = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
-    let discountApplied = 0; // İndirim yüzdesi
+    let discountApplied = 0; 
 
     const toggleCart = () => {
         if(!cartSidebar) return;
@@ -165,9 +162,7 @@ window.onload = () => {
 
     renderCart();
 });
-    // ==========================================
-    // 🔐 2. GİRİŞ YAP & KAYIT OL (KULLANICI SİSTEMİ)
-    // ==========================================
+ 
     const userBtn = document.getElementById('user-btn'); 
     const authModal = document.getElementById('auth-modal');
     const closeModal = document.getElementById('close-modal');
@@ -334,9 +329,7 @@ window.onload = () => {
         });
     }
 
-    // ==========================================
-    // ❤️ 3. FAVORİYE EKLE (KALP) İŞLEMLERİ
-    // ==========================================
+   
     const favoriteBtns = document.querySelectorAll('.btn-favorite');
     favoriteBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -365,36 +358,34 @@ window.onload = () => {
         });
     });
 
-// ==========================================
-// 🗂️ 5. ÜST MENÜ (KATEGORİ FİLTRELEME) MANTIĞI
-// ==========================================
+
 document.addEventListener('DOMContentLoaded', () => {
     const categoryLinks = document.querySelectorAll('.nav-links a[data-filter]');
     const allProducts = document.querySelectorAll('.product-card');
 
     categoryLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); // Sayfanın aniden yukarı atmasını engeller
+            e.preventDefault(); 
             
             const filterValue = e.target.getAttribute('data-filter');
 
-            // Menüdeki "aktif" (mor çizgi) durumunu tıklanan butona geçir
+           
             categoryLinks.forEach(l => l.classList.remove('active'));
             e.target.classList.add('active');
 
-            // Ekranı yumuşak bir kaydırma efektiyle Ürünler kısmına indir
+           
             document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });
 
-            // Ürünleri tek tek kontrol et ve filtrele
+        
             allProducts.forEach(product => {
                 const categoryText = product.querySelector('.category').textContent.trim();
                 
                 if (filterValue === 'all') {
-                    product.style.display = 'block'; // Anasayfada hepsini geri getir
+                    product.style.display = 'block'; 
                 } else if (categoryText === filterValue) {
-                    product.style.display = 'block'; // Kategori eşleşiyorsa göster
+                    product.style.display = 'block'; 
                 } else {
-                    product.style.display = 'none';  // Diğerlerini gizle
+                    product.style.display = 'none'; 
                 }
             });
         });
