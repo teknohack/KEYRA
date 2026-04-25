@@ -1,12 +1,11 @@
 let scene, camera, renderer, controls, keyboard, selectedKey = null;
 let artisanGroups = {};
-let keyModifications = {}; // Örn: { "uuid-123": { type: "2D", keyName: "A Tuşu", price: 50 } }
+let keyModifications = {}; 
 
 const PRICING = { '2D': 1000, '3D': 2000 };
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
-// --- EMOJİ KURULUMU ---
 const picker = new EmojiMart.Picker({
     theme: "dark",
     locale: "tr",
@@ -23,7 +22,7 @@ function toggleEmoji() {
     el.style.display = el.style.display === "block" ? "none" : "block";
 }
 
-// --- LİSTE VE FİYAT GÜNCELLEME ---
+
 function refreshUI() {
     let totalExtra = 0;
     const listEl = document.getElementById("modList");
@@ -53,7 +52,7 @@ function refreshUI() {
     document.getElementById("priceDisplay").innerText = `Toplam Ek: ${totalExtra} TL`;
 }
 
-// --- SİLME FONKSİYONU ---
+
 window.removeModification = function(uuid) {
     if (artisanGroups[uuid]) {
         artisanGroups[uuid].clear();
@@ -62,11 +61,11 @@ window.removeModification = function(uuid) {
     refreshUI();
 };
 
-// --- 3D SAHNE ---
+
 function init() {
     scene = new THREE.Scene();
     
-    // Kamera ayarı (GERİ EKLENDİ)
+    
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.set(15, 15, 15);
     
@@ -78,7 +77,7 @@ function init() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
 
-    // Işıklandırmalar (GERİ EKLENDİ)
+    
     scene.add(new THREE.AmbientLight(0xffffff, 1.2));
     const sun = new THREE.DirectionalLight(0xffffff, 0.8);
     sun.position.set(10, 20, 10);
@@ -97,7 +96,7 @@ function init() {
             }
         });
         
-        // Klavyeyi tam merkeze oturtma (GERİ EKLENDİ)
+    
         const box = new THREE.Box3().setFromObject(keyboard);
         const center = box.getCenter(new THREE.Vector3());
         keyboard.position.sub(center);
@@ -107,7 +106,7 @@ function init() {
         document.getElementById("loader").style.display = "none";
     });
 
-    // Event Dinleyicileri
+    
     window.addEventListener("pointerdown", onSelect);
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -222,11 +221,7 @@ function animate() {
     renderer.render(scene, camera);
 }
 init();
-// ==========================================
-// --- SEPETE EKLEME VE HAFIZA MANTIĞI ---
-// ==========================================
 
-// 1. Sayfa yüklendiğinde mevcut sepet sayısını üst menüye yazdır
 function updateCartCount() {
     let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
     const cartBtn = document.querySelector('.cart-btn');
@@ -234,15 +229,15 @@ function updateCartCount() {
         cartBtn.innerText = `Sepet (${cart.length})`;
     }
 }
-updateCartCount(); // Fonksiyonu hemen çalıştır
+updateCartCount(); 
 
-// 2. "Tasarımı Sepete Ekle" butonuna basıldığında çalışacak kod
+
 const buyBtn = document.querySelector('.buy-btn');
 if (buyBtn) {
     buyBtn.addEventListener('click', () => {
         const entries = Object.entries(keyModifications);
         
-        // Eğer kullanıcı hiçbir şey eklemeden sepete basarsa uyar
+    
         if (entries.length === 0) {
             alert("Sepete eklemeden önce lütfen bir tuşa tasarım (yazı, emoji veya 3D model) uygulayın!");
             return;
@@ -251,47 +246,45 @@ if (buyBtn) {
         let totalExtra = 0;
         let modDetails = [];
         
-        // Yapılan tüm tasarımları tek bir metinde birleştir ve fiyatı hesapla
+       
         entries.forEach(([uuid, data]) => {
             totalExtra += data.price;
             modDetails.push(`${data.keyName} (${data.type})`);
         });
 
-        // 1. Klavyenin ana (baz) fiyatını belirle (örneğin 2000 TL)
+        
         const basePrice = 2000;
         const finalPrice = basePrice + totalExtra;
 
-        // Sepete atılacak "Ürün" objesini oluştur
+      
         const customProduct = {
-            id: Date.now().toString(), // Benzersiz ürün numarası (string olmalı)
+            id: Date.now().toString(), 
             name: "Kişiselleştirilmiş Klavye",
             details: modDetails.join(" + ") + ` (Ekstralar: ${totalExtra} TL)`, 
-            price: finalPrice + " TL", // Toplam fiyat (script.js string bekliyor)
+            price: finalPrice + " TL", 
             quantity: 1,
-            img: "mavik.jpeg" // Sepette varsayılan bir görsel görünsün
+            img: "mavik.jpeg" 
         };
 
-        // Hafızadaki eski sepeti çağır, yeni ürünü içine at ve tekrar kaydet
+      
         let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
         cart.push(customProduct);
         localStorage.setItem('shoppingCart', JSON.stringify(cart));
 
-        // Menüdeki Sepet yazısını güncelle
+      
         updateCartCount();
         
-        // Kullanıcıya şık bir bildirim ver
+       
         alert(`Harika tasarımın sepete eklendi!\nKlavye: ${basePrice} TL\nEkstralar: ${totalExtra} TL\nToplam Tutar: ${finalPrice} TL`);
 
-        // --- SEPETE EKLENDİKTEN SONRA TASARIMI SIFIRLA ---
-        // Sahnedeki eklemeleri sil
+       
         Object.values(artisanGroups).forEach(group => {
             group.clear();
         });
         
-        // Verileri sıfırla
         keyModifications = {};
         
-        // Arayüzü sıfırla
+       
         refreshUI();
         if(selectedKey && selectedKey.material) {
             selectedKey.material.color.setHex(selectedKey.userData.oldColor);
