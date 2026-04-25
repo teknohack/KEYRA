@@ -1,4 +1,4 @@
-/* --- RENK DEĞİŞKENLERİ --- */
+
 :root {
     --bg-black: #878787;
     --neon-purple: #bc13fe;
@@ -21,7 +21,7 @@ body {
     z-index: -1; 
 }
 
-/* --- NAVİGASYON (HEADER) --- */
+
 .main-header {
     position: fixed;
     top: 20px;
@@ -37,7 +37,7 @@ body {
     align-items: center;
     border-radius: 20px;
     border: 1px solid var(--neon-purple);
-    z-index: 2000; /* Oyun butonu ve ürünlerden üstte */
+    z-index: 2000; 
     box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
 }
 
@@ -63,7 +63,7 @@ body {
     border-radius: 12px;
 }
 
-/* --- OYUN ELEMENTLERİ --- */
+
 #game-btn {
     position: fixed;
     bottom: 25px;
@@ -114,7 +114,7 @@ body {
     cursor: pointer;
 }
 
-/* --- İÇERİK --- */
+
 .spacer {
     height: 100vh;
     display: flex;
@@ -199,9 +199,9 @@ body {
 }
 
 .sub-page #container3d {
-    display: none; /* Alt sayfalarda 3D modeli gizleyebiliriz veya arkada kalabilir */
+    display: none; 
 }
-/* --- KİŞİSELLEŞTİRME STÜDYOSU EK CSS --- */
+
 .studio-body {
     margin: 0;
     overflow: hidden;
@@ -256,14 +256,14 @@ body {
 .ui-panel input {
     
     width: 100%;
-    box-sizing: border-box; /* KRİTİK: Genişliği padding dahil hesaplar, taşmayı engeller */
+    box-sizing: border-box; 
     padding: 12px;
     margin-top: 10px;
     background: #000;
     color: #fff;
     border: 1px solid #444;
     border-radius: 10px;
-    display: block; /* Kutunun satırı tam kaplamasını sağlar */
+    display: block;
 }
 
 .btn-emoji { background: var(--neon-purple); color: #fff; border: none; }
@@ -297,7 +297,7 @@ body {
     z-index: 1000;
     color: var(--neon-cyan);
 }
-/* ... önceki CSS kodlarının altına ekleyin ... */
+
 
 .mod-list-container {
     max-height: 150px;
@@ -306,7 +306,7 @@ body {
     padding-right: 5px;
 }
 
-/* Scrollbar tasarımı */
+
 .mod-list-container::-webkit-scrollbar { width: 4px; }
 .mod-list-container::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 10px; }
 
@@ -333,15 +333,13 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.7rem;
-    width: auto !important; /* Global buton genişliğini ezmek için */
+    width: auto !important; 
     margin: 0 !important;
 }
 
 .btn-remove:hover { background: #ff0000; }
 
-/* ==========================================
-   📱 MOBİL UYUMLULUK
-   ========================================== */
+
 @media (max-width: 768px) {
     .main-header {
         flex-direction: column;
